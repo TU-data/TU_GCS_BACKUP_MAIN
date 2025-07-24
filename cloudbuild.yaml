@@ -28,3 +28,6 @@ steps:
 
 images:
 - 'gcr.io/$PROJECT_ID/gcs-backup-service:$COMMIT_SHA'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
