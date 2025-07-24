@@ -11,8 +11,11 @@ steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: gcloud
   args:
-  'run', 'deploy', 'tu-gcs-backup-main', # Cloud Run 서비스 이름
-    '--image', 'gcr.io/$PROJECT_ID/tu-gcs-backup-main:$COMMIT_SHA',
+  - 'run'
+  - 'deploy'
+  - 'tu-gcs-backup-main' # Cloud Run 서비스 이름
+  - '--image'
+  - 'gcr.io/$PROJECT_ID/tu-gcs-backup-main:$COMMIT_SHA'
   - '--region'
   - 'asia-northeast3' # Cloud Run service deployment region
   - '--service-account'
