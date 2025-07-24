@@ -4,6 +4,8 @@ from google.cloud import bigquery, storage
 from datetime import datetime
 import logging
 from pydantic import BaseModel
+from typing import Optional
+from fastapi import Query, Body
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -27,7 +29,11 @@ except Exception as e:
 
 @app.post("/backup", status_code=status.HTTP_202_ACCEPTED)
 @app.get("/backup", status_code=status.HTTP_202_ACCEPTED)
-def backup_dataset(request: BackupRequest):
+def backup_dataset(
+    request: Optional[BackupRequest] = Body(None),
+    dataset_id: Optional[str] = Query(None),
+    bucket_name: Optional[str] = Query(None),
+):
     """
     Triggers a backup of a BigQuery dataset to Google Cloud Storage.
     The BigQuery dataset ID and GCS bucket name are provided in the request body.
@@ -38,8 +44,16 @@ def backup_dataset(request: BackupRequest):
             detail="Google Cloud clients are not initialized. Check application startup logs."
         )
 
-    dataset_id = request.dataset_id
-    bucket_name = request.bucket_name
+    if request:
+        dataset_id = request.dataset_id
+        bucket_name = request.bucket_name
+    elif dataset_id and bucket_name:
+        pass  # Already set from query parameters
+    else:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Missing dataset_id or bucket_name. For POST requests, provide in body. For GET requests, provide as query parameters."
+        )
 
     try:
         bucket = storage_client.get_bucket(bucket_name)
