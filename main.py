@@ -84,7 +84,7 @@ def backup_dataset(
 
     for table_item in tables:
         table_id = table_item.table_id
-        destination_uri = f"gs://{bucket_name}/{dataset_id}/{table_id}/{table_id}_{timestamp}_*.parquet"
+        destination_uri = f"gs://{bucket_name}/{dataset_id}/{table_id}/{table_id}_{timestamp}.parquet"
         table_ref = dataset_ref.table(table_id)
 
         extract_job_config = bigquery.ExtractJobConfig()
