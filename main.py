@@ -16,7 +16,7 @@ class BackupRequest(BaseModel):
     dataset_id: str
     bucket_name: str
 
-# Initialize clients 
+# Initialize clients   
 try:
     bq_client = bigquery.Client()
     storage_client = storage.Client()
