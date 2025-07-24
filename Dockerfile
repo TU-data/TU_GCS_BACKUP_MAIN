@@ -9,14 +9,11 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Ensure Python output is sent straight to the terminal without buffering
 ENV PYTHONUNBUFFERED 1
 
-# Install uv, the fast Python installer
-RUN pip install uv
-
 # Copy only the dependency configuration file
 COPY pyproject.toml ./
 
-# Install dependencies using uv
-RUN uv pip sync pyproject.toml --system
+# Install dependencies using pip
+RUN pip install --no-cache-dir -e .
 
 # Copy the rest of the application code
 COPY . .
