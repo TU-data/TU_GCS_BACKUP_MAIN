@@ -9,11 +9,11 @@ ENV PYTHONDONTWRITEBYTECODE 1
 # Ensure Python output is sent straight to the terminal without buffering
 ENV PYTHONUNBUFFERED 1
 
-# Copy only the dependency configuration file
+# Copy pyproject.toml to install dependencies
 COPY pyproject.toml ./
 
 # Install dependencies using pip
-RUN pip install --no-cache-dir -e .
+RUN pip install --no-cache-dir fastapi uvicorn google-cloud-bigquery google-cloud-storage pydantic
 
 # Copy the rest of the application code
 COPY . .
