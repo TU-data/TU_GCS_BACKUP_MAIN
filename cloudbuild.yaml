@@ -15,6 +15,8 @@ steps:
   - 'gcs-backup-service'
   - '--image'
   - 'gcr.io/$PROJECT_ID/gcs-backup-service:$COMMIT_SHA'
+  - '--region'
+  - 'asia-northeast3' # Cloud Run service deployment region
   
   - '--platform'
   - 'managed'
