@@ -1,11 +1,11 @@
 steps:
 # Build the container image
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/$PROJECT_ID/gcs-backup-service:$COMMIT_SHA', '.']
+  args: ['build', '-t', 'gcr.io/$PROJECT_ID/tu-gcs-backup-main:$COMMIT_SHA', '.']
 
-# Push the container image to Container Registry
+# 2. 빌드한 이미지를 Container Registry에 푸시
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/gcs-backup-service:$COMMIT_SHA']
+  args: ['push', 'gcr.io/$PROJECT_ID/tu-gcs-backup-main:$COMMIT_SHA']
 
 # Deploy container image to Cloud Run
 - name: 'gcr.io/cloud-builders/gcloud'
