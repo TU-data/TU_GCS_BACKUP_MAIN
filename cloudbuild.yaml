@@ -8,12 +8,8 @@ steps:
   args: ['push', 'gcr.io/$PROJECT_ID/gcs-backup-service:$COMMIT_SHA']
 
 # Deploy container image to Cloud Run
-- name: 'gcr.io/google-appengine/exec-wrapper'
+- name: 'gcr.io/cloud-builders/gcloud'
   args:
-  - '-i'
-  - 'gcr.io/$PROJECT_ID/gcs-backup-service:$COMMIT_SHA'
-  - '--'
-  - 'gcloud'
   - 'run'
   - 'deploy'
   - 'gcs-backup-service'
