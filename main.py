@@ -26,6 +26,7 @@ except Exception as e:
     storage_client = None
 
 @app.post("/backup", status_code=status.HTTP_202_ACCEPTED)
+@app.get("/backup", status_code=status.HTTP_202_ACCEPTED)
 def backup_dataset(request: BackupRequest):
     """
     Triggers a backup of a BigQuery dataset to Google Cloud Storage.
