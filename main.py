@@ -84,11 +84,11 @@ def backup_dataset(
 
     for table_item in tables:
         table_id = table_item.table_id
-        destination_uri = f"gs://{bucket_name}/{dataset_id}/{table_id}/{timestamp}/backup-*.csv"
+        destination_uri = f"gs://{bucket_name}/{dataset_id}/{table_id}/{table_id}_{timestamp}_*.parquet"
         table_ref = dataset_ref.table(table_id)
 
         extract_job_config = bigquery.ExtractJobConfig()
-        extract_job_config.destination_format = bigquery.DestinationFormat.CSV
+        extract_job_config.destination_format = bigquery.DestinationFormat.PARQUET
 
         try:
             logger.info(f"Starting backup for table '{project}.{dataset_id}.{table_id}' to '{destination_uri}'")
