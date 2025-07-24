@@ -105,4 +105,4 @@ def backup_dataset(request: BackupRequest):
 
 @app.get("/")
 def read_root():
-    return {"message": "GCS Backup Service is running. POST to /backup to start a backup."}
+    return {"message": "GCS Backup Service is running. POST to /backup to start a backup."} 
