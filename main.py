@@ -1,7 +1,7 @@
 import os
 from fastapi import FastAPI, HTTPException, status
 from google.cloud import bigquery, storage
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 import logging
 from pydantic import BaseModel
 from typing import Optional
@@ -79,7 +79,7 @@ def backup_dataset(
     if not tables:
         return {"message": f"No tables found in dataset '{dataset_id}'. Nothing to back up."}
 
-    timestamp = (datetime.utcnow() + timedelta(hours=9)).strftime("%Y%m%d%H%M%S")
+    timestamp = (datetime.now(timezone.utc) + timedelta(hours=9)).strftime("%Y%m%d%H%M%S")
     backed_up_tables = []
 
     for table_item in tables:
